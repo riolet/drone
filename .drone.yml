@@ -37,7 +37,7 @@ publish:
       branch: master
       event: push
 
-services:
+compose:
   postgres:
     image: postgres:9.4.5
     environment:
