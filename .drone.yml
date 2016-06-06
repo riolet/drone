@@ -1,3 +1,6 @@
+clone:
+  skip_verify: true
+
 workspace:
   base: /drone
   path: src/github.com/drone/drone
@@ -24,7 +27,9 @@ pipeline:
       event: push
 
   docker:
-    repo: drone/drone
+    username: $$DOCKER_USERNAME
+    password: $$DOCKET_PASSWORD
+    repo: riolet/drone
     tag: [ "0.5.0" ]
     storage_driver: overlay
     when:
