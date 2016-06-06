@@ -1,6 +1,6 @@
 clone:
   skip_verify: true
-  path: src/github.com/drone/drone
+  path: github.com/drone/drone
 
 workspace:
   base: /drone
