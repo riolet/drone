@@ -207,7 +207,9 @@ func (a *Agent) exec(spec *yaml.Config, payload *queue.Work, cancel <-chan bool)
 				payload.Build.Deploy,
 				payload.Build.Event,
 				payload.Build.Branch,
-				status, payload.Job.Environment) { // TODO: fix this whole section
+				status,
+				strings.TrimPrefix(payload.Build.Ref, "refs/tags/"),
+				payload.Job.Environment) { // TODO: fix this whole section
 
 				pipeline.Skip()
 			} else {

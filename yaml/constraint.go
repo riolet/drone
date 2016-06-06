@@ -13,17 +13,19 @@ type Constraints struct {
 	Event       Constraint
 	Branch      Constraint
 	Status      Constraint
+	Tag	    Constraint
 	Matrix      ConstraintMap
 }
 
 // Match returns true if all constraints match the given input. If a single constraint
 // fails a false value is returned.
-func (c *Constraints) Match(arch, target, event, branch, status string, matrix map[string]string) bool {
+func (c *Constraints) Match(arch, target, event, branch, status, tag string, matrix map[string]string) bool {
 	return c.Platform.Match(arch) &&
 		c.Environment.Match(target) &&
 		c.Event.Match(event) &&
 		c.Branch.Match(branch) &&
 		c.Status.Match(status) &&
+		c.Tag.Match(tag) &&
 		c.Matrix.Match(matrix)
 }
 
