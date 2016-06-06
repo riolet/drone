@@ -1,5 +1,6 @@
 clone:
   path: github.com/drone/drone
+  skip_verify: true
 
 build:
   test:
