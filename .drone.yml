@@ -5,7 +5,7 @@ workspace:
   base: /drone
   path: src/github.com/drone/drone
 
-pipeline:
+build:
   test:
     image: drone/golang:1.5
     environment:
@@ -25,7 +25,7 @@ pipeline:
       - make build
     when:
       event: push
-
+publish:
   docker:
     username: $$DOCKER_USERNAME
     password: $$DOCKET_PASSWORD
