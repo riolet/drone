@@ -1,40 +1,21 @@
 clone:
-  skip_verify: true
   path: github.com/drone/drone
-
-workspace:
-  base: /drone
-  path: src/github.com/drone/drone
 
 build:
   test:
     image: drone/golang:1.5
     environment:
       - GO15VENDOREXPERIMENT=1
-      - GOPATH=/drone
     commands:
-      - export PATH=$PATH:$GOPATH/bin
       - make deps gen
       - make test test_postgres test_mysql
   dist:
     image: drone/golang:1.5
     environment:
       - GO15VENDOREXPERIMENT=1
-      - GOPATH=/drone
     commands:
-      - export PATH=$PATH:$GOPATH/bin
       - make build
     when:
-      event: push
-publish:
-  docker:
-    username: $$DOCKER_USERNAME
-    password: $$DOCKET_PASSWORD
-    repo: riolet/drone
-    tag: [ "0.5.0" ]
-    storage_driver: overlay
-    when:
-      branch: master
       event: push
 
 compose:
@@ -47,3 +28,12 @@ compose:
     environment:
       - MYSQL_DATABASE=test
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+
+publish:
+  docker:
+    username: $$DOCKER_USERNAME
+    password: $$DOCKER_PASSWORD
+    repo: riolet/drone
+    tag: [ "latest", "0.4.3" ]
+    when:
+      branch: master
